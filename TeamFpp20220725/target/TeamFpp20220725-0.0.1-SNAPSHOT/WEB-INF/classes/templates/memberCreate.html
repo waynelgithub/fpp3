@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Create New Customer</title>
+</head>
+<body>
+<form action="memberCreate" method ="post">
+   帳號:<input type="text" name="username"/><br/>
+   密碼:<input type="text" name = "password"/><br/>
+   Email:<input type="text" name ="email"/><br/>
+   顯示姓名:<input type="text" name="name"/><br/>
+   電話:<input type="text" name = "phone"/><br/>
+   手機號碼:<input type="text" name ="mobile"/><br/>
+   身分選擇:
+  <input type="radio" name="ownerflag" value="Y">房屋屋主
+  <input type="radio" name="ownerflag" value="N">一般用戶<br/>
+  積點:<input type="text" name = "points" value="0"/><br/>
+ <input type="submit" value="Submit"/>
+</form>
+</body>
+</html>

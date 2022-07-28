@@ -3,8 +3,14 @@ package com.example.demo.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,7 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class FileUploadController {
 	private static final String VirtualPath = "/upload";
-	private static final String UPLOAD_DIRECTORY = "/images";
+	private static final String UPLOAD_DIRECTORY = "/houseimages";
 	// 上傳路徑一定是 virtual path!
 	
 //	@RequestMapping(value = "/upload",method = RequestMethod.GET)
@@ -25,23 +31,93 @@ public class FileUploadController {
 //	}
 	@RequestMapping(value = "/savefile", method = RequestMethod.POST)
 	//public ModelAndView saveimage(@RequestParam CommonsMultipartFile file, HttpSession session)
-	public ModelAndView saveimage(@RequestParam MultipartFile file, HttpSession session)
+	public ModelAndView saveimage(@RequestParam MultipartFile file, @RequestParam String houseid,HttpSession session)
 			throws Exception {
+		//get ServletContext
 		ServletContext context = session.getServletContext();
+		//get server real path related to webapp's virtual path 
 		String path = context.getRealPath(UPLOAD_DIRECTORY);
-		File tmpFile = new File(path);
-		if (!tmpFile.exists()) {
-			tmpFile.mkdir();
+		
+		File _path = new File(path);
+		if (!_path.exists()) {
+			_path.mkdir();
 		}
 		String filename = file.getOriginalFilename();
-		System.out.println(path + File.separator + filename);
-		byte[] bytes = file.getBytes();
-		BufferedOutputStream stream = new BufferedOutputStream(
-				new FileOutputStream(new File(path + File.separator + filename)));
-		stream.write(bytes);
-		stream.flush();
-		stream.close();
 
+	//增加改名程序
+		//取得houseid
+		String houseId= houseid;
+	//取得picListNo
+		//取得一個Integer array, 代表從db取得的該houseId 圖片的 picListNo array
+		Integer[] listNoTemp = {0,1,2,3,4,5,6,8,9,10,11,12,13}; //要從DB取得[] 
+		List<Integer> piclistNos= new ArrayList<Integer>(Arrays.asList(listNoTemp));
+		
+		//array listNos size() < 上限(15)，則可以增加圖片
+		Integer upperLimit = 15;
+		Integer picListNo=-1;
+		
+		if (piclistNos.size()<upperLimit)
+		{
+			//比對picListNo, 找到還未使用的picListNo來使用
+				
+				//1.迴圈法
+				for (Integer no =0; no <upperLimit; no++)			
+				{
+//					int flag=0;
+//					for(Integer pNo: piclistNos)
+//					{
+//						if (no == pNo) {
+//							flag=1;
+//							break;						
+//						}
+//					}
+//					if (flag==1) continue;
+//					
+//					picListNo= no;
+//					break;
+
+					
+				//2.list方法				
+					if (!piclistNos.contains(no))
+					{
+						picListNo=no;
+						break;
+					}
+					
+			}
+			System.out.println("picListNo:"+picListNo);	
+			
+			String fileBaseName = FilenameUtils.getBaseName(filename);
+			String fileExtension = FilenameUtils.getExtension(filename);
+			System.out.println("file base name without extension:"+ fileBaseName);
+			System.out.println("file extension:"+ fileExtension);
+			//建立新檔名
+			String newFileName = houseId+"_"+picListNo+"."+fileExtension;
+			System.out.println("new file name:"+ newFileName);
+			//建立完整路徑
+			String newPathName = path+File.separator+ newFileName;
+		//改名程序完
+			
+			
+			
+			//System.out.println(path + File.separator + filename);
+			System.out.println("new path:"+newPathName);
+			byte[] bytes = file.getBytes();
+			BufferedOutputStream stream = new BufferedOutputStream(
+					new FileOutputStream(new File(newPathName)));
+			stream.write(bytes);
+			stream.flush();
+			stream.close();
+
+
+		}
+		else {
+			
+			System.out.println("Exceed image limitation.");
+		}
+
+		
+		
 		return new ModelAndView("success", "filesuccess", path + File.separator + filename);
 	}
 	

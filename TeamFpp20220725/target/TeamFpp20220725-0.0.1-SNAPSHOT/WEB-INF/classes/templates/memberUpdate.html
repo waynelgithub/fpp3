@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Update member</title>
+</head>
+<body>
+<form action="memberUpdate" th:object="${member}" method ="post">
+ 登入帳號:<input type="text" name="username" th:field="*{username}"/><br/>
+ 密碼:<input type="text" name = "password" th:field="*{password}"/><br/>
+ email:<input type="text" name ="email" th:field="*{email}"/><br/>
+ 姓名:<input type="text" name="name" th:field="*{name}"/><br/>
+ 電話:<input type="text" name = "phone" th:field="*{phone}"/><br/>
+ 手機:<input type="text" name ="mobile" th:field="*{mobile}"/><br/> 
+ 屋主(Y/N):<input type="text" name ="ownerflag" th:field="*{ownerflag}"/><br/>
+ 積分:<input type="text" name ="points" th:field="*{points}"/><br/>  
+ <input type="hidden" name ="id" th:field="*{memberid}"/>
+ <input type="submit" value="Submit"/>
+</form>
+</body>
+</html>
+

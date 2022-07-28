@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mobile Camera Test</title>
+</head>
+<body>
+<h1>
+<!-- 
+New open camera<input type="file" name="image" accept="image/*" capture="environment">
+<p/>
+New open facing camera<input type="file" name="image" accept="image/*" capture="user">
+<p/>
+Open Camera:<input type="file" accept="image/*;capture=camera">
+<p/>
+Open Camcorder:<input type="file" accept="video/*;capture=camcorder">
+<p/>
+Use Microphone<input type="file" accept="audio/*;capture=microphone">
+<p/>
+Choose multiple pics<input type="file" accept="image/*" multiple>
+<p/>
+Choose multiple videos<input type="file" accept="video/*" multiple>
+<p/>
+<a href="https://webrtc.github.io/samples/src/content/getusermedia/volume/">Mobile Microphone</a>
+
+</p>
+
+<input type="button" id="HideBrowse" value="拍照" onclick="document.getElementById('hide').click();" /><br>
+<input type="file" accept="image/*" capture="environment" style="display:none" id="hide" name="hide" /><br>
+
+ -->
+
+</p>
+<form action="savefile" method="post" enctype="multipart/form-data">
+<input type="button" id="HideBrowse" value="前相機拍照" onclick="document.getElementById('hide').click();" /><br>
+<input type="file" name="file" accept="image/*" capture="environment"  style="display:none" id="hide"><br>
+<input type="submit" value="Submit"/>
+</form>
+</h1>
+</body>
+</html>

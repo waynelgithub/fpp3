@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+</head>
+
+<body>
+<form action="#" method="post">
+UserName:<input type="text" id="username" name="username" value="username" /> <p>
+Password:<input type="password" id="mypass" name="password" value="123" /> <p>
+<input type="submit"  value="Send" onclick="return check()" />
+</form>
+<div id="msg"></div> 
+
+<script type="text/javascript">
+	function check(){
+		var user = $("#username").val();
+		var pwd = $("#mypass").val();
+		// Checking for blank fields.
+		if( user =='' || pwd ==''){
+			alert ("不能空白");
+			return false;
+		}
+		else return true;
+
+	}
+</script>
+</body>
+</html>
