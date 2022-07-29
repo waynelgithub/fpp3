@@ -23,7 +23,7 @@ public class MemberController {
 	  // 後台 for 管理者 
 	  @RequestMapping(value = "/memberCreate", method = RequestMethod.GET)
 	    public ModelAndView openFormCreate() {
-	       ModelAndView model = new ModelAndView("templates/memberCreate");
+	       ModelAndView model = new ModelAndView("redirect:/memberRetrieveAll");
 	       return model;
 	    }
 	    @RequestMapping(value = "/memberCreate", method = RequestMethod.POST)
@@ -37,7 +37,7 @@ public class MemberController {
 	    public ModelAndView retrievemembers() throws SQLException{
 	       Iterable<Member> members = dao.findAll();
 
-	       ModelAndView model = new ModelAndView("memberList");
+	       ModelAndView model = new ModelAndView("templates/memberList");
 	       model.addObject("members",members);
 	       return model;
 	    }

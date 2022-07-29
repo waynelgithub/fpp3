@@ -12,23 +12,54 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+import com.example.demo.model.EmployeeListVO;
+import com.example.demo.model.HousePic;
+
+@RestController
 public class FileUploadController {
-	private static final String VirtualPath = "/upload";
-	private static final String UPLOAD_DIRECTORY = "/houseimages";
-	// 上傳路徑一定是 virtual path!
+
+	private static final String IMAGE_DIRECTORY = "houseimages";
+	// 上傳路徑一定是個 virtual path!
 	
-//	@RequestMapping(value = "/upload",method = RequestMethod.GET)
-//	public ModelAndView uploadForm() {
-//		return new ModelAndView("fileUpload");
-//	}
+
+	List<HousePic> hps = new ArrayList<>();
+
+	
+	
+	
+	public FileUploadController() {
+		HousePic hp1 = new HousePic(1, 1, "houseimages", "1_1.jpg", 1, "jpg");
+		HousePic hp2 = new HousePic(2, 2, "houseimages", "2_1.jpg", 1, "jpg");
+		HousePic hp3 = new HousePic(3, 2, "houseimages", "2_6.jpg", 6, "jpg");
+		hps.add(hp1);
+		hps.add(hp2);
+		hps.add(hp3);
+
+	}
+	
+	@RequestMapping(value = "/getimage/{no}",method = RequestMethod.GET)
+	public ModelAndView getImage1(@PathVariable String no) {
+		return new ModelAndView("redirect:/houseimages/"+no+".jpg");
+	}
+	@GetMapping (value="/getimage")
+	public  List<HousePic> getImage2(ModelMap model) {
+
+		return hps;
+	}
+	
+	
 	@RequestMapping(value = "/savefile", method = RequestMethod.POST)
 	//public ModelAndView saveimage(@RequestParam CommonsMultipartFile file, HttpSession session)
 	public ModelAndView saveimage(@RequestParam MultipartFile file, @RequestParam String houseid,HttpSession session)
@@ -36,7 +67,7 @@ public class FileUploadController {
 		//get ServletContext
 		ServletContext context = session.getServletContext();
 		//get server real path related to webapp's virtual path 
-		String path = context.getRealPath(UPLOAD_DIRECTORY);
+		String path = context.getRealPath("/"+IMAGE_DIRECTORY);
 		
 		File _path = new File(path);
 		if (!_path.exists()) {
