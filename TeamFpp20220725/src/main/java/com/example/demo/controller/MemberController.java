@@ -23,7 +23,7 @@ public class MemberController {
 	  // 後台 for 管理者 
 	  @RequestMapping(value = "/memberCreate", method = RequestMethod.GET)
 	    public ModelAndView openFormCreate() {
-	       ModelAndView model = new ModelAndView("memberCreate");
+	       ModelAndView model = new ModelAndView("templates/memberCreate");
 	       return model;
 	    }
 	    @RequestMapping(value = "/memberCreate", method = RequestMethod.POST)
