@@ -23,7 +23,7 @@ public class MemberController {
 	  // 後台 for 管理者 
 	  @RequestMapping(value = "/memberCreate", method = RequestMethod.GET)
 	    public ModelAndView openFormCreate() {
-	       ModelAndView model = new ModelAndView("redirect:/memberRetrieveAll");
+	       ModelAndView model = new ModelAndView("templates/memberCreate");
 	       return model;
 	    }
 	    @RequestMapping(value = "/memberCreate", method = RequestMethod.POST)
@@ -44,7 +44,7 @@ public class MemberController {
 	 
 	   @RequestMapping(value = "/memberUpdate", method = RequestMethod.GET)
 	    public ModelAndView openFormUpdate(@RequestParam(value="id", required=false, defaultValue="1") Long id) {
-	       ModelAndView model = new ModelAndView("memberUpdate");
+	       ModelAndView model = new ModelAndView("templates/memberUpdate");
 	       //Member member = dao.findById(id).get();
 	       Member member =dao.findOne(id);
 	       model.addObject("member",member);
@@ -67,7 +67,7 @@ public class MemberController {
 	 // 前台
 	 @RequestMapping(value = "/acctlogin", method = RequestMethod.GET)
 	    public ModelAndView openlogin() {
-	       ModelAndView model = new ModelAndView("acctlogin");
+	       ModelAndView model = new ModelAndView("templates/acctlogin");
 	       return model;
 	    }
 
@@ -76,18 +76,18 @@ public class MemberController {
 	    	Member member =dao.findbyUsername(user);
 	    	if (member != null && (member.getPassword().equals(pwd)) ) {
 	    		System.out.println("login success!");
-	    		ModelAndView model = new ModelAndView("loginSuccess");
+	    		ModelAndView model = new ModelAndView("templates/loginSuccess");
 	    		ses.setAttribute("M", member);
 	    		return model;
 	    	} 
 		    System.out.println("login fail!");
-	    	ModelAndView model = new ModelAndView("acctlogin");
+	    	ModelAndView model = new ModelAndView("templates/acctlogin");
 		    return model;
 	    }   
 	  
 	   @RequestMapping(value = "/acctUpdate", method = RequestMethod.GET)
 	    public ModelAndView AcctUpdate(HttpSession ses) {
-	       ModelAndView model = new ModelAndView("acctUpdate");
+	       ModelAndView model = new ModelAndView("templates/acctUpdate");
 	       Member m1=(Member)ses.getAttribute("M");
 	       Member member =dao.findOne(m1.getMemberid());
 	       model.addObject("member",member);
@@ -95,7 +95,7 @@ public class MemberController {
 	    }
 	    @RequestMapping(value = "/acctUpdate", method = RequestMethod.POST)
 	    public ModelAndView AcctUpdate(@ModelAttribute Member mem) throws SQLException {
-	       ModelAndView model = new ModelAndView("loginSuccess");
+	       ModelAndView model = new ModelAndView("templates/loginSuccess");
 	       dao.save(mem);  
 	       return model;
 	    }    
