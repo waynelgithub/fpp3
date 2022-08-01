@@ -3,13 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <title>Login</title>
+<style>
+    input[type="submit"]{padding:5px 15px; background:#ccc; border:0 none;
+cursor:pointer;
+-webkit-border-radius: 5px;
+border-radius: 5px; }
+    
+    input[type="text"]{padding:5px 15px; border:2px black solid;
+cursor:pointer;
+-webkit-border-radius: 5px;
+border-radius: 5px; }
+    
+.demo{
+    padding-top: 50px;
+    text-align: center
+}
+</style>
 </head>
 
 <body>
-<form action="acctlogin" method="post">
-UserName:<input type="text" id="username" name="username" value="username" required/> <p>
-Password:<input type="password" id="mypass" name="password" value="123" required/> <p>
-<input type="submit"  value="Send" onclick="return check()" />
+<form action="acctlogin" class="demo" method="post">
+<h1>登入主頁</h1>
+帳號 :<input type="text" id="username" name="username" value="username" required/> <p>
+密碼 :<input type="password" id="mypass" name="password" value="123" required/> <p>
+<input type="submit"  value="確定" onclick="return check()" />
 </form>
 <p><a href="memberCreate">會員註冊</a></p>
 <div id="msg"></div> 
