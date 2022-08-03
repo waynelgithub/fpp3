@@ -1,0 +1,131 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>
+        AngularJS - REST Demo using $http service
+    </title>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>    
+    <!-- Load AngularJS -->
+    <script src="js/house.js"></script>
+       <style>
+      .button {
+          cursor: pointer;
+          color: blue;
+      }
+      td,th{
+        border: 1px solid gray;
+        width: 25%;
+        text-align: left;
+      }
+      table {
+        width: 600px;
+      }
+    </style>
+  <head>
+  <body ng-app="UserManagement" ng-controller="UserManagementController">
+     <h1>
+          AngularJS - Use $http to invoke RESTful APIs
+      </h1>
+ 
+      <table>
+        <tr>
+          <th>description</th>
+          <th>price</th>
+          <th>houseType</th>
+          <th>houseStatus</th>
+          <th>housePattern</th>
+          <th>houseCity</th>
+          <th>houseArea</th>
+          <th>address</th>
+          <th>houseSize</th>
+          <th>houseOwner</th>
+          <th>createdDT</th>
+          <th>updatedDT</th>
+       	  <th>gmapURL</th>
+        </tr>
+ 
+        <tr ng-repeat="house in house">
+          <td>{{ house.description }}</td>
+          <td>{{ house.price }}</td>
+          <td>{{ house.houseType }}</td>
+          <td>{{ house.houseStatus }}</td>
+          <td>{{ house.housePattern }}</td>
+          <td>{{ house.houseCity }}</td>
+          <td>{{ house.houseArea }}</td>
+          <td>{{ house.address }}</td>
+          <td>{{ house.houseSize }}</td>
+          <td>{{ house.houseOwner }}</td>
+          <td>{{ house.createdDT }}</td>
+          <td>{{ house.updatedDT }}</td>
+          <td>{{ house.gmapURL }}</td>
+          <td><a ng-click="editHouse( house )" class="button">Edit</a> | <a ng-click="removeHouse( house )" class="button">Remove</a></td>
+        </tr>
+  
+      </table>
+ 
+      <h2>Add/Edit House</h2>
+ 
+    <form ng-submit="submitHouse()">
+        <table>
+          <tr>
+            <td>description</td>
+            <td><input type="text" ng-model="form.description" size="60" /></td>
+          </tr>
+        <tr>
+            <td>price</td>
+            <td><input type="number" ng-model="form.price" size="60" /></td>
+          </tr>
+          <tr>
+            <td>houseType</td>
+            <td><input type="text" ng-model="form.houseType" size="60" /></td>
+          </tr>
+          <tr>
+            <td>houseStatus</td>
+            <td><input type="radio" ng-model="form.houseStatus" size="60" /></td>
+          </tr>
+          <tr>
+            <td>housePattern</td>
+            <td><input type="text" ng-model="form.housePattern" size="60" /></td>
+          </tr>
+          <tr>
+            <td>houseCity</td>
+            <td><input type="text" ng-model="form.houseCity" size="60" /></td>
+          </tr>
+          <tr>
+            <td>houseArea</td>
+            <td><input type="text" ng-model="form.houseArea" size="60" /></td>
+          </tr>
+          <tr>
+            <td>address</td>
+            <td><input type="text" ng-model="form.address" size="60" /></td>
+          </tr>
+          <tr>
+            <td>houseSize</td>
+            <td><input  type="text"  ng-model="form.houseSize" size="60" /></td>
+          </tr>
+          <tr>
+            <td>houseOwner</td>
+            <td><input type="text" ng-model="form.houseOwner" size="60" /></td>
+          </tr>
+          <tr>
+            <td>createdDT</td>
+            <td><input type="text" ng-model="form.createdDT" size="60" /></td>
+          </tr>
+          <tr>
+            <td>updatedDT</td>
+            <td><input type="text" ng-model="form.updatedDT" size="60" /></td>
+          </tr>
+          <tr>
+            <td>gmapURL</td>
+            <td><input type="text" ng-model="form.gmapURL" size="60" /></td>
+          </tr>
+          <tr>
+            <td colspan="2"><input type="submit" value="Submit" /></td>
+          </tr>
+        </table>
+    </form>
+ 
+  </body>
+</html>
