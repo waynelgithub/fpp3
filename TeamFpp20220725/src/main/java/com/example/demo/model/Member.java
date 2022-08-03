@@ -23,12 +23,13 @@ public class Member {
     private String mobile;
     private String ownerflag;
     private int	points;
-   
+    private String memberrole; 
+    
 	public Member() {
     }
     
 	public Member(String username, String password, String email, String name, String phone, String mobile,
-			String ownerflag, int points) {
+			String ownerflag, int points, String memberrole) {
 		
 		this.username = username;
 		this.password = password;
@@ -108,6 +109,14 @@ public class Member {
 		return points;
 	}
 
+	public String getMemberrole() {
+		return memberrole;
+	}
+
+	public void setMemberrole(String memberrole) {
+		this.memberrole = memberrole;
+	}
+
 	public void setPoints(int points) {
 		this.points = points;
 	}
@@ -116,7 +125,7 @@ public class Member {
 	public String toString() {
 		return "Member [memberid=" + memberid + ", username=" + username + ", password=" + password + ", email=" + email
 				+ ", name=" + name + ", phone=" + phone + ", mobile=" + mobile + ", ownerflag=" + ownerflag
-				+ ", points=" + points + "]";
+				+ ", memberrole=" + memberrole+ ", points=" + points + "]";
 	}    
     
 }

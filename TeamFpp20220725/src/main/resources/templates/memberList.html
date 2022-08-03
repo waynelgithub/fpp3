@@ -13,6 +13,7 @@
   <th>編號</th>  <th>姓名</th>  <th>密碼</th>
   <th>Email</th>  <th>顯示姓名</th>  <th>電話</th>
   <th>手機號碼</th> <th>屋主(Y/N)</th>  <th>積點</th>
+  <th>會員權限</th>
  </tr>
     <tr th:each="member : ${members} " th:object="${member}">
         <td th:text="*{memberid}">1</td>
@@ -24,6 +25,7 @@
         <td th:text="*{mobile}">mobile</td>
         <td th:text="*{ownerflag}">N</td>
         <td th:text="*{points}">0</td>
+        <td th:text="*{memberrole}">0</td>
          <td><a th:href="@{memberUpdate(id=${member.memberid})}">修改</a> 
               <a th:href="@{memberDelete(id=${member.memberid})}">刪除</a></td>
     </tr>

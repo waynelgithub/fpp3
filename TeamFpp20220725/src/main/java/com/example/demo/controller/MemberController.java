@@ -4,8 +4,6 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpSession;
 
-import com.example.demo.model.MemberDAO;
-import com.example.demo.model.Member;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.example.demo.model.Member;
+import com.example.demo.model.MemberDAO;
 
 @Controller
 public class MemberController {
@@ -28,7 +29,7 @@ public class MemberController {
 	    }
 	    @RequestMapping(value = "/memberCreate", method = RequestMethod.POST)
 	    public ModelAndView processFormCreate(@ModelAttribute Member mem) throws SQLException {
-	       ModelAndView model = new ModelAndView("redirect:/memberRetrieveAll");
+	       ModelAndView model = new ModelAndView("templates/acctlogin");
 	       dao.save(mem);
 	       return model;
 	    }
@@ -75,10 +76,21 @@ public class MemberController {
 	    public ModelAndView processlogin(@RequestParam("username") String user,@RequestParam("password") String pwd, HttpSession ses) throws SQLException {
 	    	Member member =dao.findbyUsername(user);
 	    	if (member != null && (member.getPassword().equals(pwd)) ) {
-	    		System.out.println("login success!");
-	    		ModelAndView model = new ModelAndView("templates/loginSuccess");
-	    		ses.setAttribute("M", member);
-	    		return model;
+	    		if (member.getMemberrole().equals("Y"))
+	    		{
+	    			ModelAndView model = new ModelAndView("redirect:/memberRetrieveAll");
+		    		System.out.println("login success!");
+		    		ses.setAttribute("M", member);
+	    			return model;
+	    		}
+	    		else
+	    		{
+		    		
+		    		ModelAndView model = new ModelAndView("redirect:/homepage2.jsp");
+		    		System.out.println("login success!");
+		    		ses.setAttribute("M", member);
+		    		return model;
+	    		}
 	    	} 
 		    System.out.println("login fail!");
 	    	ModelAndView model = new ModelAndView("templates/acctlogin");
