@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <title>
-        AngularJS - REST Demo using $http service
+	物件狀態總覽
     </title>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>    
     <!-- Load AngularJS -->
@@ -18,32 +18,34 @@
         border: 1px solid gray;
         width: 25%;
         text-align: left;
+        white-space:nowrap;
       }
       table {
+      border: 3px solid gray;
         width: 600px;
       }
     </style>
   <head>
   <body ng-app="UserManagement" ng-controller="UserManagementController">
      <h1>
-          AngularJS - Use $http to invoke RESTful APIs
+	房屋狀態總覽
       </h1>
  
       <table>
         <tr>
-          <th>description</th>
-          <th>price</th>
-          <th>houseType</th>
-          <th>houseStatus</th>
-          <th>housePattern</th>
-          <th>houseCity</th>
-          <th>houseArea</th>
-          <th>address</th>
-          <th>houseSize</th>
-          <th>houseOwner</th>
-          <th>createdDT</th>
-          <th>updatedDT</th>
-       	  <th>gmapURL</th>
+          <th>標題</th>
+          <th>總價</th>
+          <th>房屋類型</th>
+          <th>狀態</th>
+          <th>格局</th>
+          <th>所在城市</th>
+          <th>所在地區</th>
+          <th>詳細地址</th>
+          <th>坪數</th>
+          <th>物件種類</th>
+          <th>刊登日期</th>
+          <th>更新日期</th>
+       	  <th>GoogleMap經緯度</th>
         </tr>
  
         <tr ng-repeat="house in house">
@@ -60,65 +62,65 @@
           <td>{{ house.createdDT }}</td>
           <td>{{ house.updatedDT }}</td>
           <td>{{ house.gmapURL }}</td>
-          <td><a ng-click="editHouse( house )" class="button">Edit</a> | <a ng-click="removeHouse( house )" class="button">Remove</a></td>
+          <td><a ng-click="editHouse( house )" class="button">修改</a> | <a ng-click="removeHouse( house )" class="button">刪除</a></td>
         </tr>
   
       </table>
  
-      <h2>Add/Edit House</h2>
+      <h2>房屋新增修改</h2>
  
     <form ng-submit="submitHouse()">
         <table>
           <tr>
-            <td>description</td>
+            <td>標題</td>
             <td><input type="text" ng-model="form.description" size="60" /></td>
           </tr>
         <tr>
-            <td>price</td>
+            <td>總價</td>
             <td><input type="number" ng-model="form.price" size="60" /></td>
           </tr>
           <tr>
-            <td>houseType</td>
+            <td>房屋類型</td>
             <td><input type="text" ng-model="form.houseType" size="60" /></td>
           </tr>
           <tr>
-            <td>houseStatus</td>
+            <td>狀態</td>
             <td><input type="radio" ng-model="form.houseStatus" size="60" /></td>
           </tr>
           <tr>
-            <td>housePattern</td>
+            <td>格局</td>
             <td><input type="text" ng-model="form.housePattern" size="60" /></td>
           </tr>
           <tr>
-            <td>houseCity</td>
+            <td>所在城市</td>
             <td><input type="text" ng-model="form.houseCity" size="60" /></td>
           </tr>
           <tr>
-            <td>houseArea</td>
+            <td>所在地區</td>
             <td><input type="text" ng-model="form.houseArea" size="60" /></td>
           </tr>
           <tr>
-            <td>address</td>
+            <td>詳細地址</td>
             <td><input type="text" ng-model="form.address" size="60" /></td>
           </tr>
           <tr>
-            <td>houseSize</td>
+            <td>坪數</td>
             <td><input  type="text"  ng-model="form.houseSize" size="60" /></td>
           </tr>
           <tr>
-            <td>houseOwner</td>
+            <td>物件種類</td>
             <td><input type="text" ng-model="form.houseOwner" size="60" /></td>
           </tr>
           <tr>
-            <td>createdDT</td>
+            <td>刊登日期</td>
             <td><input type="text" ng-model="form.createdDT" size="60" /></td>
           </tr>
           <tr>
-            <td>updatedDT</td>
+            <td>更新日期</td>
             <td><input type="text" ng-model="form.updatedDT" size="60" /></td>
           </tr>
           <tr>
-            <td>gmapURL</td>
+            <td>GoogleMap經緯度</td>
             <td><input type="text" ng-model="form.gmapURL" size="60" /></td>
           </tr>
           <tr>
