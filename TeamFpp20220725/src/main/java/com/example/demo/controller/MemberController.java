@@ -76,7 +76,7 @@ public class MemberController {
 	    public ModelAndView processlogin(@RequestParam("username") String user,@RequestParam("password") String pwd, HttpSession ses) throws SQLException {
 	    	Member member =dao.findbyUsername(user);
 	    	if (member != null && (member.getPassword().equals(pwd)) ) {
-	    		if (member.getMemberrole().equals("Y"))
+	    		if (member.getMemberrole().equals("1"))
 	    		{
 	    			ModelAndView model = new ModelAndView("redirect:/memberRetrieveAll");
 		    		System.out.println("login success!");

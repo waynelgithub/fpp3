@@ -142,6 +142,7 @@
                         </li>
 
                     </ul>
+                    <a href="${pageContext.request.contextPath}/h2">物件商品信息</a>
                 </div>
                 <!-- 商品信息-->
                 <div class="publish" style="width:850px">
