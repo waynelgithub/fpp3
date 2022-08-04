@@ -143,7 +143,7 @@
 
                     </ul>
                     <a href="${pageContext.request.contextPath}/h2">物件商品信息</a>
-                    <!-- -->
+                    <!--  20220804 test-->
                 </div>
                 <!-- 商品信息-->
                 <div class="publish" style="width:850px">
