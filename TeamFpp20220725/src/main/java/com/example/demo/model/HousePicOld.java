@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 //@Entity
 //@Table(name="housepic")
-public class HousePic {
+public class HousePicOld {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int pictureId;
@@ -19,11 +19,11 @@ public class HousePic {
 	int picListNo;
 	String fileExtension;
 	
-	public HousePic() {
+	public HousePicOld() {
 		
 	}
 
-	public HousePic(int pictureId, int houseId, String picVirtualPath, String picFileName, int picListNo,
+	public HousePicOld(int pictureId, int houseId, String picVirtualPath, String picFileName, int picListNo,
 			String fileExtension) {
 		this.pictureId = pictureId;
 		this.houseId = houseId;
