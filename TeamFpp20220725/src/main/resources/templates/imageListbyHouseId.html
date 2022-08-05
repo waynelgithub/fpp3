@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+<title>image list by House ID</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>  
+        <!-- Load AngularJS -->
+
+</head>
+<body >
+<div class="container" ng-app="ImageServiceApp" ng-controller="ImageServiceController">
+	<table class="table">
+	  <tr >
+<!-- 	  <th>houseId</th>  <th>pictureId</th>  <th>Path</th>
+	  <th>FileName</th>
+ -->	  
+	  <th>房屋圖片</th>
+	
+	 </tr >
+	 		<!-- 迴圈。ng-repeat="x in msg "，接收$scope.msg = List<Object>，不用想名字，
+			$index就是List內編號，x 就是代表各object, 很像for each-->
+	    <tr  th:each="image : ${imageList} " th:object="${image}">
+<!-- 
+	    	<td th:text="*{house.houseId}">{{ image.house.houseId }}</td>
+	        <td th:text="*{pictureId}">{{ image.pictureId }}</td>
+	        <td th:text="*{picVirtualPath}">{{ image.picVirtualPath }}</td>
+	        <td th:text="*{picFileName}">{{ image.picFileName }}</td>
+ -->
+	        <td ><img th:src="'../'+*{picVirtualPath+'/'+picFileName}" alt='th:text="*{picFileName}"' width="500" height="333"></td>
+	    </tr>
+	</table>
+</div>
+
+	<script type="text/javascript">
+	 var app = angular.module("ImageServiceApp", []);
+	 	//1. app.controller 的function部分要丟入 $http 或 $httpParamSerializer 裡面才可以使用，不然報undefine
+	 	
+	    app.controller("ImageServiceController", function ($scope, $http, $httpParamSerializer) {
+
+			//1.撈出全部image
+			var houseid=2;
+	    	$http.get('getImageByHouseId/'+houseid) 
+            .then(
+                function (response) {
+	         	   	$scope.msg = response.data;
+	                $scope.statusval = response.status;
+	                $scope.statustext = response.statusText;
+	                $scope.headers = response.headers();
+	             	},
+             	function (data, status, header, config) {
+	         	   	$scope.msg = response.data;
+	                $scope.statusval = response.status;
+	                $scope.statustext = response.statusText;
+	                $scope.headers = response.headers();
+	         		}
+          		);
+	    	
+	    	
+	    	 $scope.addEmployee = function (name, department)  {
+	        
+	        	//2. JS object 方式
+		        var emp=new Object();//給@RequestBody用
+		        emp.name=name;
+		        emp.department=department;
+		        
+		    	//3. 轉用form (serialize)    
+		        var emp2 =$httpParamSerializer(emp);//給@ModelAttribute用
+		    		//3.1 直接轉
+		    		var emp3= $httpParamSerializer(
+		    		{"name":name, "department": department}	//沒有雙引號也沒差	
+		    		)
+		        
+	            var config = {
+	                headers : {
+	                'Content-Type': 'application/json;' //2.給RequestBody用
+	                //'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'//3.給ModelAttribute用
+	                }
+	            }
+		        
+	            $http.post('addemployee', emp, config) 
+	            .then(
+	                    function (response) {
+	    	         	   	$scope.msg = response.data;
+	    	                $scope.statusval = response.status;
+	    	                $scope.statustext = response.statusText;
+	    	                $scope.headers = response.headers();
+	    	             	},
+	                 	function (data, status, header, config) {
+	    	         	   	$scope.msg = response.data;
+	    	                $scope.statusval = response.status;
+	    	                $scope.statustext = response.statusText;
+	    	                $scope.headers = response.headers();
+	    	         		}
+	              		);
+	        };
+	        
+	        
+	    	 $scope.editEmployee = function (id, name, department)  {
+	 	        
+	 	        	//2. JS object 方式
+	 		        var emp=new Object();//給@RequestBody用
+	 		        emp.name=name;
+	 		        emp.department=department;
+	 		        
+	 		    	//3. 轉用form (serialize)    
+	 		        var emp2 =$httpParamSerializer(emp);//給@ModelAttribute用
+	 		    		//3.1 直接轉
+	 		    		var emp3= $httpParamSerializer(
+	 		    		{"name":name, "department": department}	//沒有雙引號也沒差	
+	 		    		)
+	 		        
+	 	            var config = {
+	 	                headers : {
+	 	                'Content-Type': 'application/json;' //2.給RequestBody用
+	 	                //'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'//3.給ModelAttribute用
+	 	                	//, 'responseType':'text/html'
+	 	                }
+	 	            }
+/*	 		        
+	 	         $http.put('employee/'+id, emp, config) 
+		            .then(
+		                    function (response) {
+		    	         	   	$scope.msg = response.data;
+		    	                $scope.statusval = response.status;
+		    	                $scope.statustext = response.statusText;
+		    	                $scope.headers = response.headers();
+		    	             	},
+		                 	function (data, status, header, config) {
+		    	         	   	$scope.msg = response.data;
+		    	                $scope.statusval = response.status;
+		    	                $scope.statustext = response.statusText;
+		    	                $scope.headers = response.headers();
+		    	         		}
+		              		);
+*/
+
+	 		           $http({
+	 		              method : "put",
+	 		              url : 'employee/'+id,
+	 		              data : emp,
+	 		              headers : {
+	 		                'Content-Type' : 'application/json'
+	 		              }
+	 		            })
+	 		            //.then( _success, _error );
+			            .then(
+			                    function (response) {
+			    	         	   	$scope.msg = response.data;
+			    	                $scope.statusval = response.status;
+			    	                $scope.statustext = response.statusText;
+			    	                $scope.headers = response.headers();
+			    	             	},
+			                 	function (data, status, header, config) {
+			    	         	   	$scope.msg = response.data;
+			    	                $scope.statusval = response.status;
+			    	                $scope.statustext = response.statusText;
+			    	                $scope.headers = response.headers();
+			    	         		}
+			              		);	 		      
+            	
+	 	    };
+	    
+	    
+	    
+	   });
+</script>
+</body>
+</html>
