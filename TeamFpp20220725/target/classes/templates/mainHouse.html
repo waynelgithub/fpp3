@@ -46,8 +46,9 @@
           <th>刊登日期</th>
           <th>更新日期</th>
 <!--      <th>GoogleMap經緯度</th>  -->
-       	  <th>HouseID</th>
-       	  <th>功能操作</th>
+       	  <th>圖片</th>
+       	  <th>拍照</th>
+       	  <th>修改刪除</th>
         </tr>
  
         <tr ng-repeat="house in house">
@@ -65,6 +66,7 @@
           <td>{{ house.updatedDT }}</td>
  <!-- <td>{/{ house.gmapURL /}}</td>   -->         
           <td><a href="getHousepicth/{{house.houseId}}" target="_blank">圖片</a></td>
+          <td><a href="uploadHousepicth/{{house.houseId}}" target="_blank">拍照</a></td>
           <td><a ng-click="editHouse( house )" class="button">修改</a> | <a ng-click="removeHouse( house )" class="button">刪除</a></td>
         </tr>
   

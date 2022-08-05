@@ -142,6 +142,16 @@ public class HousepicController {
 		
 	}
 	
+	@GetMapping (value="/uploadHousepicth/{houseId}")
+	public  ModelAndView uploadHousepicByHouseid(@PathVariable Integer houseId) {
+		House houseTmp = houseDao.findByHouseId(houseId);
+		
+		//hps.forEach(System.out::println); // trace用		
+		
+		return new ModelAndView("templates/HousepicUpload", "house", houseTmp);
+		
+	}
+	
 	@RequestMapping(value = "/housepicUpload", method = RequestMethod.POST)
 	//@PostMapping(value = "/savefile", method = RequestMethod.POST)
 	//public ModelAndView saveimage(@RequestParam CommonsMultipartFile file, HttpSession session)
