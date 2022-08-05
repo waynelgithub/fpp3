@@ -42,10 +42,12 @@
           <th>所在地區</th>
           <th>詳細地址</th>
           <th>坪數</th>
-          <th>物件種類</th>
+          <th>屋主</th>
           <th>刊登日期</th>
           <th>更新日期</th>
-       	  <th>GoogleMap經緯度</th>
+<!--      <th>GoogleMap經緯度</th>  -->
+       	  <th>HouseID</th>
+       	  <th>功能操作</th>
         </tr>
  
         <tr ng-repeat="house in house">
@@ -61,7 +63,8 @@
           <td>{{ house.houseOwner }}</td>
           <td>{{ house.createdDT }}</td>
           <td>{{ house.updatedDT }}</td>
-          <td>{{ house.gmapURL }}</td>
+ <!-- <td>{/{ house.gmapURL /}}</td>   -->         
+          <td><a href="getHousepicth/{{house.houseId}}" target="_blank">圖片</a></td>
           <td><a ng-click="editHouse( house )" class="button">修改</a> | <a ng-click="removeHouse( house )" class="button">刪除</a></td>
         </tr>
   

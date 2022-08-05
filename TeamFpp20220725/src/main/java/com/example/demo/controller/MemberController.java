@@ -29,7 +29,7 @@ public class MemberController {
 	    }
 	    @RequestMapping(value = "/memberCreate", method = RequestMethod.POST)
 	    public ModelAndView processFormCreate(@ModelAttribute Member mem) throws SQLException {
-	       ModelAndView model = new ModelAndView("templates/acctlogin");
+	       ModelAndView model = new ModelAndView("redirect:/acctlogin");
 	       dao.save(mem);
 	       return model;
 	    }

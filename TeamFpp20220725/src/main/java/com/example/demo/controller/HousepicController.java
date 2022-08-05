@@ -122,13 +122,23 @@ public class HousepicController {
 		return hps;
 	}
 	
-	@GetMapping (value="/getHousepicTh")
+	@GetMapping (value="/getHousepicAllth")
 	public  ModelAndView getImageth() {
 
 		List<Housepic> hps =hpdao.findAll();
 		//hps.forEach(System.out::println); // trace用		
 		
 		return new ModelAndView("templates/imageList", "imageList", hps);
+		
+	}
+	
+	@GetMapping (value="/getHousepicth/{houseId}")
+	public  ModelAndView getImagethByHouseid(@PathVariable Integer houseId) {
+		House houseTmp = houseDao.findByHouseId(houseId);
+		List<Housepic> hps =hpdao.findByHouse(houseTmp);
+		//hps.forEach(System.out::println); // trace用		
+		
+		return new ModelAndView("templates/imageListbyHouseId", "imageList", hps);
 		
 	}
 	
